@@ -19,9 +19,14 @@ Rails.application.routes.draw do
   get "posts/:id/comments" => "posts#comments", as: :post_comments
   post "posts/:id/comments" => "posts#create_comment"
 
-  resources :comments
+  #resources :comments
+  get 'comments/:id/comments/new' => 'comments#new_comment', as: :new_comment_comment
+  post 'comments/:id/comments' => 'comments#create_comment', as: :comment_comments
   post "comments/:id/votes" => "comments#create_vote", as: :comment_create_vote
   post "posts/:id/votes" => "posts#create_vote", as: :post_create_vote
+  #404 HANDLING FOR PRODUCTION
+  #get '*path', to: "application#not_found" # => redirect('/404.html')
+
 
   # get 'users/new'
 
