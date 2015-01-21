@@ -1,0 +1,31 @@
+<h3>Latest posts</h3>
+<table class="table">
+<tr>
+    <th>Upvote</th>
+    <th>Score</th>
+    <th>Title</th>
+    <th>User</th>
+    <th>Posted</th>
+    <th>Comments</th>
+</tr>
+<% if @posts.any? %>
+    <% @posts.each do |post| %>
+        <tr>
+            <td><% if post.votes.where(user_id:@current_user['id']).any? %>
+                    <%= button_to "&#8682".html_safe, post_create_vote_path(post), :class => "btn btn-default btn-xs disabled" %>
+                <%else%>
+                <%= button_to "&#8682".html_safe, post_create_vote_path(post), :class => "btn btn-default btn-xs ajax-vote" %>
+                <%end%>
+             </td>
+            <td><span class="vote-count"><%= post.votes.length %>  </span>    </td>
+            <td><%= link_to post.title,post.link, :target=>'_blank' %></td>
+            <td><%= post.user ? post.user.name : 'Unknown' %></td>
+            <td><%= format_creation_time post %> </td>
+            <td><%= link_to "Comment", post_comments_path(post), :class => "btn btn-warning btn-sm"%></td>
+        </tr>
+    <% end %>
+<% else %>
+    <tr>
+        <td>No posts</td>
+    </tr>
+<% end %>

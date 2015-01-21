@@ -1,0 +1,13 @@
+Recurssion example<h1> <%= link_to @post.title, @post.link, :target => "_blank" %> </h1>
+
+<% @post.comments.each do |c| %>
+<%= c.body %>
+c.comment
+c.comment
+c.comment
+c.comment
+where does it end
+<% end %>
+
+on html.erb file accessing it...render partial
+<%= render :partial => 'comment', :collection => @post.comments %>

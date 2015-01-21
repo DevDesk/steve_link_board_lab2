@@ -1,0 +1,13 @@
+<div class="btn-group test">
+    <ul class = "list-inline col-md-12">
+        <li> <%=button_to "&#8682".html_safe, comment_create_vote_path(comment), :class => "btn btn-default btn-xs ajax-vote"%></li>
+        <li> <em class="vote-count"><%=comment.votes.count%> </em></li>
+        <li> <%= comment.user ? comment.user.name : "Unknown" %> <small><%= format_creation_time comment %></small> </li>
+        <li> <%= comment.body %> </li>
+        <li>
+    <% unless comment.comments.empty? %>
+            <%= render :partial => 'comment', :collection => comment.comments %>
+    <% end %>
+        </li>
+    </ul>
+</div>
