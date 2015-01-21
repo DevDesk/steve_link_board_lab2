@@ -46,6 +46,14 @@ class PostsController < ApplicationController
       @post = Post.find_by_id(params[:id])
       @comment = Comment.new
     end
+    def create_comment
+      return unless is_authenticated?
+      user = User.find_by_id(@current_user['id'])
+      post = Post.find_by_id(params[:id])
+      user.comments << post.comments.create({body:params[:comment][:body]})
+      redirect_to post_comments_path
+      #render json: params
+    end
 
 
     def create_vote
